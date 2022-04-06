@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		
+		<script type="text/javascript" src="js/core.js"></script>
+		<script type="text/javascript" src="js/form-spec-svg.js"></script>
+		<script type="text/javascript" src="js/form-spec-svg.js"></script>
+		<script type="text/javascript" src="js/converts.js"></script>
+		<script type="text/javascript" src="js/scripts.js"></script>
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Online image cropper 1.1</title>
+	</head>
+	<body onload="pageLoaded()">
+
+		<form id="main-form" onsubmit="return false;">
+			<input type="hidden" id="input-image">
+			
+			<!-- <section id="error-panel" class="hidden">
+				<h2>ERROR</h2>
+				<p id="error-text">There happened some error.</p>
+				<button onclick="this.parentNode.classList.add('hidden');">Hide</button>
+			</section> -->
+			
+			<label>Input image:</label>
+		
+			<input type="file" id="input-bhai" onchange="SetupFunc()" accept="image/*">
+			<input type="url" id="input-url" oninput="loadInputImageByUrl()"  onpaste="inputImagePasteHandler(event)" style="display:none">
+
+			<label>Crop (top):</label>
+			<div class="inline-group">
+				<input type="range" id="input-crop-top" oninput="updateSvgByForm()" min="0" max="1" step="0.000976563" value="0">
+				<input type="button" onclick="toSquare(0)" value="full size" class="mini-button" />
+				<input type="button" onclick="toSquare(1/4)" value="3/4" class="mini-button" />
+				<input type="button" onclick="toSquare(1/2)" value="1/2" class="mini-button" />
+				<input type="button" onclick="toSquare(3/4)" value="1/4" class="mini-button" />
+			</div>
+
+			<label>Crop (bottom):</label>
+			<input type="range" id="input-crop-bottom" oninput="updateSvgByForm()" min="0" max="1" step="0.000976563" value="1">
+			
+			<label>Crop (left):</label>
+			<input type="range" id="input-crop-left" oninput="updateSvgByForm()" min="0" max="1" step="0.000976563" value="0">
+			
+			<label>Crop (right):</label>
+			<input type="range" id="input-crop-right" oninput="updateSvgByForm()" min="0" max="1" step="0.000976563" value="1">
+
+			<label>Round corners:</label>
+			<div class="inline-group">
+				<input type="range" id="input-round-corners" oninput="updateSvgByForm()" min="0" max="0.5" step="0.000976563" value="0">
+				<input type="button" onclick="toCircle(1)" value="circle" class="mini-button" />
+				<input type="button" onclick="toCircle(0)" value="rect/square" class="mini-button" />
+			</div>
+			<button onclick="SvgToPng()">Generate Image</button>
+
+			<!-- <label>Output image:</label>
+			<output>
+				<a href="" id="output-link" target="_blank">Open image</a>
+			</output> -->
+
+			<!-- <input type="reset" value="Reset"> -->
+			<p>IET EQUATION SOLVER</p>
+			<div id="png-container">
+				
+			</div>
+			<canvas id="canvas" width="800" height="400" style="display: none;"></canvas>
+		</form>
+
+		<div id="svg-wrapper">
+			<svg width="10" height="10" id="svg-elem">
+				<defs>
+					<clipPath id="total-crop">
+						<rect id="total-crop-rect"
+							x="0" y="0" width="10" height="10" rx="0" ry="0" />
+					</clipPath>
+				</defs>
+				<!--<rect x="0" y="0" width="40" height="100" fill="red" />-->
+
+				<image id="image-to-crop"
+					xlink:href="img/no-image.jpg" clip-path="url(#total-crop)"
+					x="0" y="0" width="10" height="10" />
+			</svg>
+		</div>
+	</body>
+	<script>
+		function SetupFunc(){
+			var file = document.getElementById("input-bhai").files[0];
+			var reader = new FileReader();
+			reader.onloadend = function() {
+			  document.getElementById("input-url").value = reader.result
+			  loadInputImageByUrl()
+			}
+			reader.readAsDataURL(file);
+		}
+		function SvgToPng(){
+			var svgString = new XMLSerializer().serializeToString(document.querySelector('#svg-elem'));
+		
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			var DOMURL = self.URL || self.webkitURL || self;
+			var img = new Image();
+			var svg = new Blob([svgString], {type: "image/svg+xml;charset=utf-8"});
+			var url = DOMURL.createObjectURL(svg);
+			img.onload = function() {
+				ctx.drawImage(img, 0, 0);
+				var png = canvas.toDataURL("image/png");
+	            console.log(png)
+				document.querySelector('#png-container').innerHTML = '<img src="'+png+'"/>';
+				DOMURL.revokeObjectURL(png);
+			};
+			img.src = url;
+		}
+	</script>
+	<script>
+
+		
+		</script>
+</html>
