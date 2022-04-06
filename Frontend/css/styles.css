@@ -1,0 +1,111 @@
+
+
+label {
+	display: block;
+	min-width: 8eM;
+	float: left;
+	clear: both;
+	margin: 0.1eM 0.2eM;
+	padding: 0.3eM;
+}
+
+input, output, textarea {
+	display: block;
+	margin: 0.8eM 0.2eM;
+	padding: 0.3eM;
+
+}
+/**********************************************************/
+
+input {
+	min-width: 8eM;
+}
+
+input[type="submit"] {
+	min-width: 5eM;
+}
+
+input[type="url"] {
+	min-width: 20eM;
+}
+
+input[type="checkbox"] {
+	min-width: 1eM;
+}
+
+input[type="radio"] {
+	min-width: 1eM;
+}
+
+
+input[type="range"] {
+	min-width: 10eM;
+}
+/**********************************************************/
+
+textarea {
+	font-family: inherit;
+	min-width: 10eM;
+	height: 4eM;
+}
+
+textarea.big {
+	height: 10eM;
+}
+
+textarea.monospaced {
+	font-family: monospace;
+}
+
+/**********************************************************/
+.inline-group {
+	display: block;	/* hehe */
+}
+
+.inline-group * {
+	display: inline;	/* hehe */
+	float: none;
+	vertical-align: top;
+}
+
+.mini-button {
+	min-width: 1eM;
+	padding: 0.4eM;
+}
+
+/**********************************************************/
+#main-form {
+	display: block;
+	float: left;
+	min-width: 30eM;
+
+	background-color: #EEEEEE;
+	margin: 1eM;
+	padding: 1eM;
+}
+
+#main-form p {
+	max-width: 30eM;
+}
+
+#svg-wrapper {
+	display: inline-block;
+
+	background-color: #CCCCCC;
+	border: 1eM solid #AAAAAA;
+
+
+}
+
+
+/**********************************************************/
+
+#error-panel {
+	color: #800000;
+	background-color: #FFCCCC;
+	padding: 0.5eM 1eM;
+}
+
+.hidden {
+	display: none
+}
