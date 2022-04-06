@@ -1,0 +1,23 @@
+<svg width="10" height="10" id="svg-elem" onload="prepare()">
+
+	<defs>
+		<clipPath id="total-crop">
+
+			<rect id="total-crop-rect"
+				x="0" y="0" width="10" height="10" rx="0" ry="0" />
+		</clipPath>
+
+		<script>
+			
+			function prepare() {
+				alert('prepared');
+			}
+		</script>
+	</defs>
+
+	<image id="image-to-crop"
+		xmlns:xlink="http://www.w3.org/1999/xlink"
+		xlink:href="https://upload.wikimedia.org/wikipedia/commons/c/c2/F_icon.svg" clip-path="url(#total-crop)"
+		x="0" y="0" width="10" height="10" />
+</svg>
+
